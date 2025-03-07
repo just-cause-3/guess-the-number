@@ -37,13 +37,38 @@ console.log(str)
 
 console.log(document.querySelector('.message').textContent);
 
-document.querySelector('.message').textContent=`You win...`
+document.querySelector('.message').textContent=``
 
-document.querySelector('.number').textContent=3
+
 document.querySelector('.score').textContent=5
 
 document.querySelector('.guess').value
 
+
+const generaterand = function(){
+    let no = Math.floor(Math.random()*20)+1
+    return no
+}
+
+let values
+let tries = 3 
+let rand=generaterand()
+console.log(rand)
+
 document.querySelector('.check').addEventListener('click',function(){
-    console.log(document.querySelector('.guess').value)
+    values=Number(document.querySelector('.guess').value) //This will return the no as srting, so we can caonvert it to number
+    document.querySelector('.guess').value=``
+    if(values===rand){
+        console.log(`Equal`)
+        document.querySelector('.message').textContent=`You win!!`
+        document.querySelector('body').style.backgroundColor='#60b347'
+    }else if(tries!=0){
+        document.querySelector('.message').textContent=`Try Again!`
+        tries--
+        document.querySelector('.number').textContent=tries
+        console.log(`Not equal`)
+    }else{
+        document.querySelector('.message').textContent=`You failed.`
+    }
 })
+
