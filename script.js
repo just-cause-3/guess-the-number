@@ -36,3 +36,14 @@ console.log(str)
 
 
 console.log(document.querySelector('.message').textContent);
+
+document.querySelector('.message').textContent=`You win...`
+
+document.querySelector('.number').textContent=3
+document.querySelector('.score').textContent=5
+
+document.querySelector('.guess').value
+
+document.querySelector('.check').addEventListener('click',function(){
+    console.log(document.querySelector('.guess').value)
+})
