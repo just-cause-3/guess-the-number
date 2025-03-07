@@ -51,24 +51,43 @@ const generaterand = function(){
 }
 
 let values
-let tries = 3 
+let tries =3
 let rand=generaterand()
 console.log(rand)
 
-document.querySelector('.check').addEventListener('click',function(){
-    values=Number(document.querySelector('.guess').value) //This will return the no as srting, so we can caonvert it to number
-    document.querySelector('.guess').value=``
-    if(values===rand){
-        console.log(`Equal`)
-        document.querySelector('.message').textContent=`You win!!`
-        document.querySelector('body').style.backgroundColor='#60b347'
-    }else if(tries!=0){
-        document.querySelector('.message').textContent=`Try Again!`
-        tries--
-        document.querySelector('.number').textContent=tries
-        console.log(`Not equal`)
-    }else{
-        document.querySelector('.message').textContent=`You failed.`
-    }
-})
+const mainfun = function(tries){
+    document.querySelector('.check').addEventListener('click',function(){
+        
+        values=Number(document.querySelector('.guess').value) //This will return the no as srting, so we can caonvert it to number
+        document.querySelector('.guess').value=``
+        if(values==rand){
+            console.log(`Equal`)
+            document.querySelector('.message').textContent=`You win!!`
+            document.querySelector('body').style.backgroundColor='#60b347'
+        }else {
+            tries--;
+            if (tries > 0) {
+                document.querySelector('.message').textContent = `Try Again!`;
+                document.querySelector('.number').textContent = tries;
+                console.log(`Not equal`);
+            } else {
+                document.querySelector('.message').textContent = `You failed.`;
+                document.querySelector('.number').textContent = `0`;
+            }
+        }
+    })
+}
 
+mainfun(tries)//Send tries as a parameter
+document.querySelector('.again').addEventListener('click',function(){
+    document.querySelector('body').style.backgroundColor='#222'
+    rand=generaterand()
+    console.log(rand)
+    tries=3
+    // document.querySelector('.number').textContent=tries
+    mainfun(tries)
+    document.querySelector('.message').textContent = "Start guessing..."; //Reset
+    document.querySelector('.guess').value = ''; //Clear the I/P
+    document.querySelector('.number').textContent = tries; //Reset tries
+    document.querySelector('body').style.backgroundColor = '#222'; //Reset Background colour
+})
